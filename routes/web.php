@@ -19,6 +19,10 @@ Route::get('/test', function () {
     return view('child');
 });
 
+Route::get('/drills/new', 'DrillsController@new')->name('drills.new');
+Route::post('/drills/new', 'DrillsController@create')->name('drills.create');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
