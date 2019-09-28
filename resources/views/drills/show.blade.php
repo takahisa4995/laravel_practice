@@ -10,6 +10,12 @@
             <p>{{ $drill->problem1}}</p>
             <p>{{ $drill->problem2}}</p>
             <p>{{ $drill->problem3}}</p>
+            <div id="app">
+              <example-component
+                title="{{ __('Practice'.'?'.$drill->title.'?') }}"
+                :drill="{{$drill}}"
+              ></example-component>
+            </div>
           </div>
         </div>
       </div>
