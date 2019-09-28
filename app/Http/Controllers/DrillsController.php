@@ -42,6 +42,15 @@ class DrillsController extends Controller
         // Sessionにメッセージを格納し、リダイレクトする
         return redirect('/drills/new')->with('flash_message', __('Registered.'));
     }
+    public function show($id)
+    {
+        if (!ctype_digit($id)) {
+            return redirect('/drills/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        $drill = Drill::find($id);
+        return view('drills.show', ['drill' => $drill]);
+    }
+
     public function edit($id)
     {
         if (!ctype_digit($id)) {
@@ -59,5 +68,13 @@ class DrillsController extends Controller
         $drill->fill($request->all())->save();
 
         return redirect('/drills')->with('flash_message', __('Registered.'));
+    }
+    public function destroy($id)
+    {
+        if (!ctype_digit($id)) {
+            return redirect('/drills/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        Drill::find($id)->delete();
+        return redirect('/drills')->with('flash_message', __('Deleted.'));
     }
 }
