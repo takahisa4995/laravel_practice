@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container">
-    <h2>{{ __('Drills List') }}</h2>
+    <h2>{{ __('Drills   List') }}</h2>
     <div class="row">
 
       @foreach ($drills as $drill)
