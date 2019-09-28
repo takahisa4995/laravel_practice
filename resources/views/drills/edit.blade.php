@@ -8,14 +8,15 @@
                 <div class="card-header">{{ __('Drill Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('drills.create') }}">
+                    <form method="POST" action="{{ route('drills.update',$drill->id) }}">
+                        
                         @csrf
 
                         <div class="form-group row">
                             <label for="title" class="col-md-4 col-form-label text-md-right">{{ __('Title') }}</label>
 
                             <div class="col-md-6">
-                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                <input id="title" type="text" class="form-control @error('title') is-invalid @enderror" name="title" value="{{ $drill->title }}" required autocomplete="title" autofocus>
 
                                 @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -29,7 +30,7 @@
                             <label for="category_name" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
                             <div class="col-md-6">
-                                <input id="category_name" type="category_name" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ old('category_name') }}" required autocomplete="category_name">
+                                <input id="category_name" type="category_name" class="form-control @error('category_name') is-invalid @enderror" name="category_name" value="{{ $drill->category_name }}" required autocomplete="category_name">
 
                                 @error('category_name')
                                     <span class="invalid-feedback" role="alert">
@@ -40,11 +41,11 @@
                         </div>
 
                         @for ( $i=1; $i <= 10; $i++)
-                          <div class=" form-group row">
+                          <div class="form-group row">
                               <label for="problem0" class="col-md-4 col-form-label text-md-right">{{ __('Problem').$i }}</label>
 
                                 <div class="col-md-6">
-                                  <input id="problem{{$i - 1}}" type="text" class="form-control @error('problem.($i - 1)) is-invalid @enderror" name="problem{{$i - 1}}"  autocomplete="problem{{$i -1}}"  autofocus value="{{ old('problem'.($i - 1)) }}">
+                                  <input id="problem{{$i - 1}}" type="text" class="form-control @error('problem'.($i - 1)) is-invalid @enderror" name="problem{{$i - 1}} "  autocomplete="problem{{$i -1}}"  autofocus value="{{ $drill['problem'.($i-1)] }}">
                               
                                   @error('problem'.($i - 1))
                                       <span class="invalid-feedback" role="alert">
@@ -54,7 +55,6 @@
                               </div>
                           </div>
                         @endfor
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

@@ -7,6 +7,11 @@ use App\Drill;
 
 class DrillsController extends Controller
 {
+    public function index()
+    {
+        $drills = Drill::all();
+        return view('drills.index', ['drills' => $drills]);
+    }
     public function new()
     {
         return view('drills.new');
@@ -30,7 +35,19 @@ class DrillsController extends Controller
         ]);
 
         $drill = new Drill;
+
+        // fillメソッドでインサート
         $drill->fill($request->all())->save();
+
+        // Sessionにメッセージを格納し、リダイレクトする
         return redirect('/drills/new')->with('flash_message', __('Registered.'));
+    }
+    public function edit($id)
+    {
+        if (!ctype_digit($id)) {
+            return redirect('/drills/new')->with('flash_message', __('Invalid operation was performed.'));
+        }
+        $drill = Drill::find($id);
+        return view('drills.edit', ['drill' => $drill]);
     }
 }

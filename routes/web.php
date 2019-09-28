@@ -15,12 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/test', function () {
-    return view('child');
-});
+
 
 Route::get('/drills/new', 'DrillsController@new')->name('drills.new');
 Route::post('/drills/new', 'DrillsController@create')->name('drills.create');
+Route::get('/drills', 'DrillsController@index')->name('drills');
+Route::get('/drills/{id}/edit', 'DrillsController@edit')->name('drills.edit');
+Route::post('/drills/{id}', 'DrillsController@update')->name('drills.update');
 
 
 Auth::routes();
