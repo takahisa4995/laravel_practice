@@ -6,7 +6,7 @@
           <div class="card-header">{{ title }}</div>
           <span class="badge badge-success">{{ category_name }}</span>
           <div class="card-body text-center drill-body">
-            <button class="btn btn-primary" @click="doDrill" v-if="!isStarted">START</button>
+            <button class="btn btn-primary" @click="doDrill()" v-if="!isStarted">START</button>
             <p v-if="isCountDown" style="font-size: 100px;">{{countDownNum}}</p>
             <template v-if="isStarted && !isCountDown && !isEnd">
               <p>{{timerNum}}</p>
