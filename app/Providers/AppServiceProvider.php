@@ -23,6 +23,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 商用環境以外の場合、SQLログを出力させます
+        if (config('app.env') !== 'production') {
+            \DB::Listen(function ($query) {
+                \Log::info("Query Time:{$query->time}s] $query->sql");
+            });
+        }
     }
 }
