@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Drill;
 
@@ -11,6 +12,11 @@ class DrillsController extends Controller
     {
         $drills = Drill::all();
         return view('drills.index', ['drills' => $drills]);
+    }
+    public function mypage()
+    {
+        $drills = Auth::user()->drills()->get();
+        return view('drills.mypage', compact('drills'));
     }
     public function new()
     {
@@ -37,7 +43,8 @@ class DrillsController extends Controller
         $drill = new Drill;
 
         // fillメソッドでインサート
-        $drill->fill($request->all())->save();
+        // $drill->fill($request->all())->save();
+        Auth::user()->drills()->save($drill->fill($request->all()));
 
         // Sessionにメッセージを格納し、リダイレクトする
         return redirect('/drills/new')->with('flash_message', __('Registered.'));
