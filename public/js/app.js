@@ -37333,7 +37333,11 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary",
-                      on: { click: _vm.doDrill }
+                      on: {
+                        click: function($event) {
+                          return _vm.doDrill()
+                        }
+                      }
                     },
                     [_vm._v("START")]
                   )
